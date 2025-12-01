@@ -1,6 +1,0 @@
----
-namespace: openshift-policy
-
-resources:
-#  - network-policy-agent-demo-sno.yaml
-  - network-policy-vllm-server-sno.yaml

@@ -1,0 +1,57 @@
+{{- if .Values.job.enabled }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.job.name }}
+  namespace: {{ .Values.namespace }}-{{ .Values.user }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: kubectl-runner
+        image: {{ .Values.images.cliTool }}
+        command:
+        - /bin/sh
+        - -c
+        - |
+          # This 'here document' passes the PipelineRun YAML directly to oc.
+          # It tells Tekton to start a new run of the '{{ .Values.pipeline.name }}' pipeline.
+          oc create -f - <<EOF
+          apiVersion: tekton.dev/v1
+          kind: PipelineRun
+          metadata:
+            # generateName creates a unique name for each run (e.g., agent-service-build-run-abc12).
+            generateName: {{ .Values.pipeline.name }}-run-
+            namespace: {{ .Values.namespace }}
+          spec:
+            taskRunTemplate:
+              serviceAccountName: {{ .Values.serviceAccount.name }}
+            pipelineRef:
+              # This must match the name of your existing Tekton Pipeline.
+              name: {{ .Values.pipeline.name }}
+            params:
+            - name: APP_NAME
+              value: "{{ .Values.application_name }}"
+            - name: IMAGE_NAME
+              value: "{{ .Values.registry }}/{{ .Values.namespace }}-{{ .Values.user }}/{{ .Values.application_name }}"
+            - name: GIT_REPO
+              value: "{{ .Values.git_url }}"
+            - name: GIT_REVISION
+              value: "{{ .Values.git_revision }}"
+            - name: PATH_CONTEXT
+              value: "{{ .Values.git_subdirectory }}"
+            # Required workspace for the pipeline
+            workspaces:
+            - name: {{ .Values.workspace.name }}
+              volumeClaimTemplate:
+                spec:
+                  accessModes:
+                  - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: {{ .Values.workspace.storage }}
+          EOF
+      restartPolicy: OnFailure
+{{- end }} 

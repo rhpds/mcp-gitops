@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application_name }}
+  namespace: {{ .Values.namespace }}-{{ .Values.user }}
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{ .Values.application_name }}
+      deployment: {{ .Values.application_name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application_name }}
+        deployment: {{ .Values.application_name }}
+    spec:
+      containers:
+      - image: "{{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }}:latest"
+        imagePullPolicy: IfNotPresent
+        name: agent-service
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: agent-config
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

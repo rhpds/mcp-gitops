@@ -1,8 +1,0 @@
-= Objectives
-
-By the end of this workshop, participants will have:
-
-* ✅ A fully functional AI agent that can autonomously handle CI/CD failures
-* ✅ Understanding of agent development lifecycle and deployment
-* ✅ Experience with observability and evaluation of AI systems
-* ✅ Practical knowledge of integrating AI agents into real-world workflows

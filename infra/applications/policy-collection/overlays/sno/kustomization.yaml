@@ -1,9 +1,0 @@
----
-namespace: openshift-policy
-
-resources:
-  # - ../../base
-  # - AC-Access-Control
-  - CM-Configuration-Management
-  - SC-System-and-Communications-Protection
-  - policyset-clusters.yaml
