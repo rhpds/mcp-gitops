@@ -4,7 +4,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.job.name }}
-  namespace: {{ .Values.namespace }}-{{ .Values.user }}
+  namespace: {{ .Values.namespace }}
 spec:
   template:
     spec:
@@ -24,7 +24,7 @@ spec:
           metadata:
             # generateName creates a unique name for each run (e.g., agent-service-build-run-abc12).
             generateName: {{ .Values.pipeline.name }}-run-
-            namespace: {{ .Values.namespace }}-{{ .Values.user }}
+            namespace: {{ .Values.namespace }}
           spec:
             taskRunTemplate:
               serviceAccountName: {{ .Values.serviceAccount.name }}
@@ -35,7 +35,7 @@ spec:
             - name: APP_NAME
               value: "{{ .Values.application_name }}"
             - name: IMAGE_NAME
-              value: "{{ .Values.registry }}/{{ .Values.namespace }}-{{ .Values.user }}/{{ .Values.application_name }}"
+              value: "{{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }}"
             - name: GIT_REPO
               value: "{{ .Values.git_url }}"
             - name: GIT_REVISION

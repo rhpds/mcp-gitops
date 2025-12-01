@@ -3,7 +3,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: {{ .Values.application_name }}
-  namespace: {{ .Values.namespace }}-{{ .Values.user }}
+  namespace: {{ .Values.namespace }}
 spec:
   to:
     kind: Service

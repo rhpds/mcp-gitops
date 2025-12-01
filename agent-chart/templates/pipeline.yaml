@@ -3,13 +3,13 @@ apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: agent-service-build
-  namespace: {{ .Values.namespace }}-{{ .Values.user }}
+  namespace: {{ .Values.namespace }}
 spec:
   params:
   - default: {{ .Values.application_name }}
     name: APP_NAME
     type: string
-  - default: {{ .Values.registry }}/{{ .Values.namespace }}-{{ .Values.user }}/{{ .Values.application_name }} 
+  - default: {{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }} 
     name: IMAGE_NAME
     type: string
   - default: {{ .Values.git_url }}
@@ -102,7 +102,7 @@ spec:
             set -Bx
             echo "Looks like your pipeline failed, let's find where you messed up"
             failed_pod=$(oc get pods --field-selector="status.phase=Failed" --sort-by="status.startTime" | grep -v "trigger-agent" | grep "agent-service-build" | tail -n 1 | awk '{print $1}')
-            curl -i -H "Content-Type: application/json" -X POST -d "{\"namespace\":\"{{ .Values.namespace }}-{{ .Values.user }}\",\"pod_name\":\"${failed_pod}\",\"container_name\":\"step-buildah\"}" {{ .Values.agent_endpoint }}
+            curl -i -H "Content-Type: application/json" -X POST -d "{\"namespace\":\"{{ .Values.namespace }}\",\"pod_name\":\"${failed_pod}\",\"container_name\":\"step-buildah\"}" {{ .Values.agent_endpoint }}
           fi
   workspaces:
   - name: workspace
