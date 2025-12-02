@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LITELLM_URL=https://litellm-litemaas.apps.prod.rhoai.rh-aiservices-bu.com/v1
-LITELLM_API_KEY=sk-Z9kMTaKyZOE5NPShqPhzOg
+LITELLM_URL=TBD
+LITELLM_API_KEY=TBD
 LITELLM_MODEL=openai/Llama-4-Scout-17B-16E-W4A16
 MCP_OPENSHIFT_URL=https://mcp-openshift-mcp-user1.apps.cluster-kd7wl.dynamic.redhatworkshops.io/sse#openshift
 MCP_OPENSHIFT_TRANSPORT=sse
