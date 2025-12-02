@@ -22,11 +22,11 @@ agentConfig:
 
 # Service Account configuration
 serviceAccount:
-  name: pipeline
+  name: agent
 
 # Role Binding configuration
 roleBinding:
-  name: openshift-pipelines-edit
+  name: agent-edit
   clusterRole: edit
 
 # Job configuration
