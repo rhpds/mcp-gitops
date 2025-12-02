@@ -18,7 +18,7 @@ agentConfig:
   mcp_openshift_transport: sse
   mcp_gitea_url: https://mcp-gitea-mcp-user1.svc.cluster.local:8080/mcp
   mcp_gitea_transport: streamable-http
-  port: 8000
+  port: "8000"
 
 # Service Account configuration
 serviceAccount:
