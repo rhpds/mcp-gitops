@@ -8,7 +8,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: {{ .Values.serviceAccount.name }}
+      # serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: kubectl-runner
         image: {{ .Values.images.cliTool }}
