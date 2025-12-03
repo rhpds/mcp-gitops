@@ -27,8 +27,8 @@ spec:
             generateName: {{ .Values.pipeline.name }}-run-
             namespace: {{ .Values.namespace }}
           spec:
-            taskRunTemplate:
-              serviceAccountName: {{ .Values.serviceAccount.name }}
+            # taskRunTemplate:
+            #   serviceAccountName: {{ .Values.serviceAccount.name }}
             pipelineRef:
               # This must match the name of your existing Tekton Pipeline.
               name: {{ .Values.pipeline.name }}
