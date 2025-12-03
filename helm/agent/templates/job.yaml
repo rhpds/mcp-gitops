@@ -8,7 +8,7 @@ metadata:
 spec:
   template:
     spec:
-      # serviceAccountName: {{ .Values.serviceAccount.name }}
+      serviceAccountName: pipeline
       containers:
       - name: kubectl-runner
         image: {{ .Values.images.cliTool }}
@@ -27,8 +27,8 @@ spec:
             generateName: {{ .Values.pipeline.name }}-run-
             namespace: {{ .Values.namespace }}
           spec:
-            # taskRunTemplate:
-            #   serviceAccountName: {{ .Values.serviceAccount.name }}
+            taskRunTemplate:
+              serviceAccountName: pipeline
             pipelineRef:
               # This must match the name of your existing Tekton Pipeline.
               name: {{ .Values.pipeline.name }}
