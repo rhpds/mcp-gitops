@@ -6,21 +6,22 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   params:
-  - default: {{ .Values.application_name }}
-    name: APP_NAME
+  - name: APP_NAME
     type: string
-  - default: {{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }} 
-    name: IMAGE_NAME
+    default: {{ .Values.application_name }}
+  - name: IMAGE_NAME
     type: string
-  - default: {{ .Values.git_url }}
-    name: GIT_REPO
+    default: {{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }} 
+  - name: GIT_REPO
     type: string
-  - default: {{ .Values.git_revision }} 
-    name: GIT_REVISION
+    default: {{ .Values.git_url }}
+  - name: GIT_REVISION
     type: string
-  - default: {{ .Values.git_subdirectory }} 
-    name: PATH_CONTEXT
+    default: {{ .Values.git_revision }} 
+  - name: PATH_CONTEXT
     type: string
+    default: {{ .Values.git_subdirectory }} 
+
   tasks:
   - name: fetch-repository
     retries: 5
@@ -45,8 +46,9 @@ spec:
     workspaces:
     - name: output
       workspace: workspace
+
   - name: build
-    retries: 5
+    retries: 2
     params:
     - name: IMAGE
       value: $(params.IMAGE_NAME)
@@ -70,6 +72,7 @@ spec:
     workspaces:
     - name: source
       workspace: workspace
+
   - name: deploy
     params:
     - name: SCRIPT
@@ -85,6 +88,7 @@ spec:
       - name: namespace
         value: openshift-pipelines
       resolver: cluster
+
   finally:
   - name: trigger-agent
     params:

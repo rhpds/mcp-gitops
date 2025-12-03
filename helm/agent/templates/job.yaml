@@ -19,6 +19,7 @@ spec:
           # This 'here document' passes the PipelineRun YAML directly to oc.
           # It tells Tekton to start a new run of the '{{ .Values.pipeline.name }}' pipeline.
           oc create -f - <<EOF
+          ---
           apiVersion: tekton.dev/v1
           kind: PipelineRun
           metadata:
