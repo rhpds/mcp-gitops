@@ -4,6 +4,8 @@ kind: Pipeline
 metadata:
   name: {{ .Values.pipeline.name }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   params:
   - name: APP_NAME

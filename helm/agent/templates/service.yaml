@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: {{ .Values.application_name }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   ports:
   - name: 8000-tcp

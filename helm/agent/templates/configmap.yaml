@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   name: agent-config
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 data:
   LITELLM_URL: {{ .Values.agentConfig.litellm_url }}
   LITELLM_API_KEY: {{ .Values.agentConfig.litellm_api_key }}

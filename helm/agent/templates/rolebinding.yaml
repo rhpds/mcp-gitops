@@ -4,6 +4,8 @@ kind: RoleBinding
 metadata:
   name: {{ .Values.roleBinding.name }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.serviceAccount.name }}
