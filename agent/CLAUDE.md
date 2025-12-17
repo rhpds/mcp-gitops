@@ -24,8 +24,8 @@ podman build -t pipeline-agent -f Containerfile .
 - `MCP_OPENSHIFT_TRANSPORT` - Transport type: `sse` or `streamable-http` (default: sse)
 - `MCP_GITEA_URL` - Gitea MCP server URL
 - `MCP_GITEA_TRANSPORT` - Transport type: `sse` or `streamable-http` (default: streamable-http)
-- `GITEA_OWNER` - Gitea repository owner for issue creation (default: user1)
-- `GITEA_REPO` - Gitea repository name for issue creation (default: mcp)
+- `MCP_GITEA_OWNER` - Gitea repository owner for issue creation (default: user1)
+- `MCP_GITEA_REPO` - Gitea repository name for issue creation (default: mcp)
 - `PORT` - Server port (default: 8000)
 
 ## Architecture

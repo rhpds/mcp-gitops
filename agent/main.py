@@ -146,8 +146,8 @@ async def run_agent(namespace: str, pod_name: str, container_name: str = None) -
     print(f"   Namespace: {namespace}")
     print(f"   Container: {container_name or '(default)'}")
 
-    gitea_owner = os.environ.get("GITEA_OWNER", "user1")
-    gitea_repo = os.environ.get("GITEA_REPO", "mcp")
+    gitea_owner = os.environ.get("MCP_GITEA_USER", "user1")
+    gitea_repo = os.environ.get("MCP_GITEA_REPO", "mcp")
 
     formatted_prompt = PROMPT_TEMPLATE.format(
         pod_name=pod_name,
