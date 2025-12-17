@@ -13,7 +13,7 @@ data:
   MCP_OPENSHIFT_URL: {{ .Values.agentConfig.mcp_openshift_url }}
   MCP_OPENSHIFT_TRANSPORT: {{ .Values.agentConfig.mcp_openshift_transport }}
   MCP_GITEA_URL: {{ .Values.agentConfig.mcp_gitea_url }}
-  MCP_GITEA_USER: {{ .values.agentConfig.mcp_gitea_user }}
-  MCP_GITEA_REPO: {{ .values.agentConfig.mcp_gitea_repo }}
+  MCP_GITEA_USER: {{ .Values.agentConfig.mcp_gitea_user }}
+  MCP_GITEA_REPO: {{ .Values.agentConfig.mcp_gitea_repo }}
   MCP_GITEA_TRANSPORT: {{ .Values.agentConfig.mcp_gitea_transport }}
   PORT: "{{ .Values.agentConfig.port }}"
