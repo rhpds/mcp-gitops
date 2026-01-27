@@ -1,4 +1,5 @@
-FROM registry.access.redhat.com/ubi9/python-311:latest
+#FROM registry.access.redhat.com/ubi9/python-311:latest
+FROM image-registry.openshift-image-registry.svc:5000/openshift/python:3.11-ubi9
 
 WORKDIR /app
 
