@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - image: "{{ .Values.registry }}/{{ .Values.namespace }}/{{ .Values.application_name }}:latest"
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: agent-service
         ports:
         - containerPort: 8000
